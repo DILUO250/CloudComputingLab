@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <style>
+        /* 基础样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 导航栏样式 */
+        header {
+            background-color: #24292e;
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #61dafb;
+        }
+
+        /* 英雄区域样式 */
+        .hero {
+            background: linear-gradient(135deg, #6e48aa, #9d50bb);
+            color: white;
+            padding: 5rem 0;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: white;
+            color: #6e48aa;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* 关于我区域样式 */
+        .about {
+            padding: 5rem 0;
+            background-color: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            color: #333;
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+            padding-right: 2rem;
+        }
+
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+        }
+
+        .about-image img {
+            max-width: 100%;
+            border-radius: 50%;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 技能区域样式 */
+        .skills {
+            padding: 5rem 0;
+            background-color: #f4f4f4;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .skill-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #6e48aa;
+        }
+
+        /* 项目区域样式 */
+        .projects {
+            padding: 5rem 0;
+            background-color: white;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            background-color: #6e48aa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .project-info {
+            padding: 1.5rem;
+        }
+
+        /* 联系区域样式 */
+        .contact {
+            padding: 5rem 0;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contact-link {
+            font-size: 2rem;
+            color: #6e48aa;
+            transition: color 0.3s;
+        }
+
+        .contact-link:hover {
+            color: #333;
+        }
+
+        /* 页脚样式 */
+        footer {
+            background-color: #24292e;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .about-content {
+                flex-direction: column;
+            }
+
+            .about-text {
+                padding-right: 0;
+                margin-bottom: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">My profile</div>
+                <ul class="nav-links">
+                    <li><a href="#about">About me</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#contact">Contact me</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Hello, I am WangQingyu</h1>
+                <p>A passionate frontend developer</p>
+                <a href="#about" class="btn">Learn more</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">About me</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Hello! My name is WangQingyu, a student major in Software Engineering in NUIST.</p>
+                    <p>I am good at taking advantage of CSS, HTML, Java.</p>
+                    <p>In my spare time, I would do nothing but learn more about new technology.</p>
+                </div>
+                <div class="about-image">
+                    <div style="width: 300px; height: 300px; background-color: #6e48aa; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 5rem; margin: 0 auto;">
+                        <span>WANG</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="skills">
+        <div class="container">
+            <h2 class="section-title">My skills</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-icon">HTML</div>
+                    <h3>Frontend development</h3>
+                    <p>Master HTML5、CSS3、JavaScript and so on.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">CSS</div>
+                    <h3>UI/UX design</h3>
+                    <p>Focus on user experience.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">JS</div>
+                    <h3>Frame and repository</h3>
+                    <p>Be familiar with React、Vue.js and so on.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">Git</div>
+                    <h3>Version control</h3>
+                    <p>Good at version controlling with Git.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title">My Projects</h2>
+            <div class="project-grid">
+                <div class="project-card">
+                    <div class="project-image">Project 1</div>
+                    <div class="project-info">
+                        <h3>Electronic commercial platform</h3>
+                        <p>A platform filled with useful functions.</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">Project 2</div>
+                    <div class="project-info">
+                        <h3>Zoo management system</h3>
+                        <p>A managing system based on Java.</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">Project 3</div>
+                    <div class="project-info">
+                        <h3>Weather applications</h3>
+                        <p>Software based on weather API.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Contact me</h2>
+            <p>If you're interested with my working experience, contact me at once!</p>
+            <div class="contact-links">
+                <a href="mailto:your-email@example.com" class="contact-link">📧</a>
+                <a href="https://github.com/yourusername" class="contact-link">🐙</a>
+                <a href="https://linkedin.com/in/yourusername" class="contact-link">💼</a>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 WangQingyu Copyright</p>
+        </div>
+    </footer>
+</body>
+</html>
